@@ -13,6 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # install nltk related packages
 RUN python -m nltk.downloader stopwords wordnet
 
+# add env variables
+ENV PORT=5000
+
 # copy the model and vectorizer files
 COPY ./models/ ./models/
 

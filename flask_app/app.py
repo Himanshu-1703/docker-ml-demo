@@ -1,5 +1,5 @@
 # updated app.py
-
+import os
 from flask import Flask, render_template,request
 import pickle
 import pandas as pd
@@ -62,7 +62,8 @@ def normalize_text(text):
 
     return text
 
-
+# load the port info from env vars
+port = os.environ["PORT"]
 
 # make the flask app
 app = Flask(__name__)
@@ -97,4 +98,4 @@ def predict():
     return render_template('index.html', result=result[0])
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=port)
