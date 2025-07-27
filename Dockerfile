@@ -1,5 +1,5 @@
 # install python --> base layer
-FROM python:3.10-slim 
+FROM python:3.10
 
 # set our workdir
 WORKDIR /app/

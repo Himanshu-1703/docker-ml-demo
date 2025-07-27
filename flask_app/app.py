@@ -2,9 +2,7 @@
 import os
 from flask import Flask, render_template,request
 import pickle
-import pandas as pd
 import numpy as np
-import pandas as pd
 import re
 import string
 from nltk.corpus import stopwords
@@ -87,12 +85,8 @@ def predict():
     # bow
     features = vectorizer.transform([text])
 
-    # Convert sparse matrix to DataFrame
-    features_df = pd.DataFrame.sparse.from_spmatrix(features)
-    features_df = pd.DataFrame(features.toarray(), columns=[str(i) for i in range(features.shape[1])])
-
     # prediction
-    result = model.predict(features_df)
+    result = model.predict(features)
     
     # show
     return render_template('index.html', result=result[0])
