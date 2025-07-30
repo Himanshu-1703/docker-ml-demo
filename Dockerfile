@@ -5,13 +5,17 @@ FROM python:3.10
 WORKDIR /app/
 
 # copy the files
-COPY ./flask_app/ .
+COPY ./flask_app/requirements.txt .
 
 # install packages
 RUN pip install --no-cache-dir -r requirements.txt
 
 # install nltk related packages
 RUN python -m nltk.downloader stopwords wordnet
+
+# copy the rest of the files
+COPY ./flask_app/app.py .
+COPY ./flask_app/templates/ ./templates/
 
 # add env variables
 ENV PORT=5000

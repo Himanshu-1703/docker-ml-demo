@@ -78,18 +78,23 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    text = request.form['text']
+    input_text = request.form['text']
     # clean
-    text = normalize_text(text)
+    text = normalize_text(input_text)
     
     # bow
     features = vectorizer.transform([text])
 
     # prediction
-    result = model.predict(features)
+    result = model.predict(features)[0]
+    
+    # open a file in test folder
+    with open("test/predictions.txt", "a") as file:
+        file.write(f"{input_text}, {'Happpy' if result == 1 else "Sad" if result == 0 else "Neutral"} \n")
     
     # show
-    return render_template('index.html', result=result[0])
+    return render_template('index.html', result=result)
 
 if __name__ == "__main__":
+    # start the flask server
     app.run(host="0.0.0.0", port=port)
