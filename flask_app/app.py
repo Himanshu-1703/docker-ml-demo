@@ -89,8 +89,8 @@ def predict():
     result = model.predict(features)[0]
     
     # open a file in test folder
-    with open("test/predictions.txt", "a") as file:
-        file.write(f"{input_text}, {'Happpy' if result == 1 else "Sad" if result == 0 else "Neutral"} \n")
+    with open("audit/predictions.txt", "a") as file:
+        file.write(f"{input_text}, {'Happpy' if result == 1 else 'Sad' if result == 0 else 'Neutral'} \n")
     
     # show
     return render_template('index.html', result=result)
